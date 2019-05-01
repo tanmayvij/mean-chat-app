@@ -1,0 +1,22 @@
+<div *ngIf="!loggedIn()">
+  <form (ngSubmit)="login()" [formGroup]="loginForm">
+    <input type="text" name="username" formControlName="username">
+    <label for="username">Enter your name</label>
+    <button type="submit">Go</button>
+  </form>
+</div>
+
+<div *ngIf="loggedIn()">
+  <ul>
+    <li *ngFor="let message of messages">
+      <b>{{ message.username }} says:</b>
+      {{ message.message }}
+    </li>
+  </ul>
+  <hr>
+  <form (ngSubmit)="postMessage()" [formGroup]="messageForm">
+    <input type="text" name="username" formControlName="username">
+    <label for="username">Enter your name</label>
+    <button type="submit">Send</button>
+  </form>
+</div>
