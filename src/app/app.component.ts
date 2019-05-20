@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   }
   getMessages()
   {
-    this.http.get("http://49.207.126.203/api/messages").subscribe(resp => {
+    this.http.get("/api/messages").subscribe(resp => {
       this.messages = resp;
     });
   }
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
         'Content-Type': 'application/json'
         })
     };
-    this.http.post("http://49.207.126.203/api/messages", postObj, httpOptions).subscribe(resp => {
+    this.http.post("/api/messages", postObj, httpOptions).subscribe(resp => {
       this.getMessages();
       this.messageForm.reset();
     });
