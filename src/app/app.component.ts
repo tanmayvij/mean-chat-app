@@ -13,14 +13,15 @@ export class AppComponent implements OnInit {
   messages: any = [];
   
   constructor(private formbuilder: FormBuilder, private http: HttpClient) {
+   
+  }
+  ngOnInit() {
     this.loginForm = this.formbuilder.group({
       'username': ['', Validators.required]
     });
     this.messageForm = this.formbuilder.group({
       'message': ['', Validators.required]
     });
-  }
-  ngOnInit() {
     this.getMessages();
   }
   loggedIn()
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit {
   }
   getMessages()
   {
-    this.http.get("/api/messages").subscribe(resp => {
+    this.http.get("http://localhost:8080/api/messages").subscribe(resp => {
       this.messages = resp;
     });
   }
@@ -49,9 +50,9 @@ export class AppComponent implements OnInit {
         'Content-Type': 'application/json'
         })
     };
-    this.http.post("/api/messages", postObj, httpOptions).subscribe(resp => {
+    this.http.post("http://localhost:8080/api/messages", postObj, httpOptions).subscribe(resp => {
       this.getMessages();
+      this.messageForm.reset();
     });
-    this.messageForm.reset();
   }
 }

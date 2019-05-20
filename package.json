@@ -4,7 +4,8 @@
   "description": "Simple chatting application build using MEAN Stack",
   "main": "app.js",
   "scripts": {
-    "build": "ng build"
+    "build": "ng build --prod",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
