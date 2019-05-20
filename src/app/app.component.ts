@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
       'message': ['', Validators.required]
     });
     this.getMessages();
+    this.repeatCall()
   }
   loggedIn()
   {
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
   }
   getMessages()
   {
-    this.http.get("http://localhost:8080/api/messages").subscribe(resp => {
+    this.http.get("http://49.207.126.203/api/messages").subscribe(resp => {
       this.messages = resp;
     });
   }
@@ -50,9 +51,14 @@ export class AppComponent implements OnInit {
         'Content-Type': 'application/json'
         })
     };
-    this.http.post("http://localhost:8080/api/messages", postObj, httpOptions).subscribe(resp => {
+    this.http.post("http://49.207.126.203/api/messages", postObj, httpOptions).subscribe(resp => {
       this.getMessages();
       this.messageForm.reset();
     });
+  }
+  repeatCall() {
+    setInterval(
+      ()=>{
+      this.getMessages(); },1000);
   }
 }
